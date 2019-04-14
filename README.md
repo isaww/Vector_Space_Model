@@ -15,4 +15,4 @@
                         help="File path for the NTCIR-docs", required=True)
                         
 ## Run
-pythone search.py
+python3 search.py
