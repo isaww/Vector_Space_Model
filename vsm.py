@@ -194,7 +194,6 @@ class VSM():
         # query = q_vector[ i ]
         score = []
         for i in range(len(self._vectors)):
-            #score.append( (-1 * (self.get_cosine_similarity(query, self._vectors[i])), i) )
             _s = self.get_cosine_similarity(query, self._vectors[i])
             score.append( (_s, i) )
 
@@ -218,7 +217,6 @@ class VSM():
             #_w = len(seed_docs)-i
             avg_emb += (self._vectors[seed_docs[i]] * _w)
             cnt += _w
-        #avg_emb = avg_emb / float(len(seed_docs))
         avg_emb = avg_emb / cnt
 
         # Do filtering
@@ -263,7 +261,6 @@ class VSM():
             f.write('query_id,retrieved_docs')
             f.write('\n')
             q_dict, q_vector = self.process_query(f_query, [0,1,3,3,3])
-            #q_dict, q_vector = self.process_query(f_query, [0,3])
             q_names = list(q_dict.keys())
             for i in range(len(q_vector)):
                 if do_rocchio==False:
@@ -283,7 +280,6 @@ class VSM():
                     score_list.sort(key=lambda tup: tup[0], reverse=True)
 
                     rel_docs = []
-                    #rel_docs = seed_docs
                     for s in range(100):
                         rel_docs.append(score_list[s][1])
 
@@ -293,16 +289,4 @@ class VSM():
                 f.write(',')
                 f.write(' '.join( doc_names ))
                 f.write('\n')
-
-#data/CIRB010/cdn/chi/cdn_chi_0000002
-#CIRB010/cdn/loc/CDN_LOC_0001457 
-    '''    
-    def process_docs(self, docs):
-        # docs: list(doc_ID, doc_content)
-        for doc in docs:
-            for word in doc[1]:
-                if not word in self._words:
-                    self._words[word] = self._wordcount
-                    self._wordcount += 1
-    '''
 
